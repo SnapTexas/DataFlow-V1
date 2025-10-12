@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Pydantic Model Creator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f7f7f9; }
+    #fields div { margin-bottom: 0.5rem; }
+    pre { background: #272822; color: #f8f8f2; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+  </style>
+  {% if msg %}
+      <script>
+          alert("{{ msg }}");
+      </script>
+{% endif %}
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 sm:p-6">
+
+  <!-- Navigation Bar -->
+  <nav class="w-full bg-indigo-600 text-white shadow-md rounded-b-xl mb-6">
+    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
+      <div class="text-xl font-bold">Pydantic Builder</div>
+      <div class="space-x-4 hidden sm:flex">
+        <a href="/" class="hover:underline">Login</a>
+        <a href="/create_model" class="hover:underline">Create Models</a>
+        <a href="/ai" class="hover:underline">Ai Agent</a>
+        <a href="/about" class="hover:underline">About</a>
+      </div>
+      <!-- Mobile Menu Button -->
+      <div class="sm:hidden">
+        <button id="menu-btn" class="focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="sm:hidden hidden px-4 pb-4 space-y-2">
+      <a href="/" class="hover:underline">Login</a>
+        <a href="/create_model" class="hover:underline">Create Models</a>
+        <a href="/ai" class="hover:underline">Ai Agent</a>
+        <a href="/about" class="hover:underline">About</a>
+    </div>
+  </nav>
+
+  <!-- Model Form -->
+  <div class="w-full max-w-2xl bg-white shadow-lg rounded-xl p-6">
+    
+    <div class="mb-4">
+      <label class="block font-semibold mb-1">Model Name:</label>
+      <input type="text" id="modelName" placeholder="e.g. UserModel"
+             class="w-full p-2 border border-gray-300 rounded focus:ring-indigo-500 focus:border-indigo-500">
+    </div>
+
+    <div id="fields"></div>
+
+    <div class="flex flex-wrap gap-2 mt-4">
+      <button onclick="addField()" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Add Field</button>
+      <button onclick="submitModel()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">Create Model</button>
+      <button onclick="showModel()" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">Show Model</button>
+    </div>
+
+    <h3 class="mt-6 font-semibold text-gray-700">Result</h3>
+    <pre id="result">{{response_from_server}}</pre>
+  </div>
+
+  <script>
+    const fieldsDiv = document.getElementById('fields');
+
+    function addField() {
+      const div = document.createElement('div');
+      div.className = 'flex flex-wrap gap-2 items-center bg-gray-50 p-2 rounded shadow-sm';
+      div.innerHTML = `
+        <input type="text" placeholder="Field name" class="flex-grow p-2 border rounded border-gray-300">
+        <select class="p-2 border rounded border-gray-300">
+          <option value="str">String</option>
+          <option value="int">Integer</option>
+          <option value="float">Float</option>
+          <option value="bool">Boolean</option>
+        </select>
+        <input type="text" placeholder="Default (optional)" class="p-2 border rounded border-gray-300 w-32">
+        <label class="flex items-center gap-1">
+          <input type="checkbox" class="w-4 h-4"> Required
+        </label>
+        <button onclick="this.parentElement.remove()" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition">Remove</button>
+      `;
+      fieldsDiv.appendChild(div);
+    }
+
+    async function submitModel() {
+      const modelName = document.getElementById('modelName').value;
+      const fieldElements = document.querySelectorAll('#fields > div');
+      const fields = [];
+
+      fieldElements.forEach(div => {
+        const [nameInput, typeSelect, defInput, requiredCheckbox] = div.querySelectorAll('input, select');
+        fields.push({
+          name: nameInput.value,
+          type: typeSelect.value,
+          default: defInput.value || null,
+          required: requiredCheckbox.checked
+        });
+      });
+
+      try {
+        const res = await fetch('http://127.0.0.1:8000/create_model', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ model_name: modelName, fields })
+        });
+        const data = await res.json();
+        document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        console.error(err);
+        document.getElementById('result').textContent = "Error connecting to backend";
+      }
+    }
+
+    function showModel() {
+      const modelName = document.getElementById('modelName').value;
+      const fieldElements = document.querySelectorAll('#fields > div');
+      let text = `class ${modelName}(BaseModel):\n`;
+      fieldElements.forEach(div => {
+        const [nameInput, typeSelect, defInput, requiredCheckbox] = div.querySelectorAll('input, select');
+        const defaultVal = defInput.value || (requiredCheckbox.checked ? '...' : 'None');
+        text += `  ${nameInput.value}: ${typeSelect.value} = ${defaultVal}\n`;
+      });
+      document.getElementById('result').textContent = text;
+    }
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+  {% extends "beacon.html" %}
+</body>
+</html>

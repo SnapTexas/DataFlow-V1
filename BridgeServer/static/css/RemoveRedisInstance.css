@@ -1,0 +1,53 @@
+.u-section-1 .u-sheet-1 {
+  min-height: 672px;
+}
+
+.u-section-1 .u-text-1 {
+  font-weight: 400;
+  margin: 67px auto 0;
+}
+
+.u-section-1 .u-text-2 {
+  margin: 1px auto 0;
+}
+
+.u-section-1 .u-form-1 {
+  height: 403px;
+  margin: 10px 302px 60px 268px;
+}
+
+.u-section-1 .u-form-group-1 {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.u-section-1 .u-form-group-3 {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.u-section-1 .u-form-group-4 {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-form-1 {
+    margin-right: 202px;
+    margin-left: 168px;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-1 .u-form-1 {
+    margin-right: 92px;
+    margin-left: 58px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-1 .u-form-1 {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

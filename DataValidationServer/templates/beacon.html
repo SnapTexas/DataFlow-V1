@@ -1,0 +1,46 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <!-- Logout when browser/tab closes, but NOT during redirects -->
+    <script>
+      let isRedirecting = false;
+
+      // Detect same-origin navigations (e.g., FastAPI redirects)
+      window.addEventListener("beforeunload", (event) => {
+        if (!isRedirecting) {
+          navigator.sendBeacon("/logout");
+        }
+      });
+
+      // Detect when FastAPI redirect is happening
+      // This catches link clicks or internal page changes
+      window.addEventListener("click", (e) => {
+        const link = e.target.closest("a");
+        if (link && link.href.startsWith(window.location.origin)) {
+          isRedirecting = true;
+        }
+      });
+
+      // Also detect manual redirects via window.location.replace or form submissions
+      const origAssign = window.location.assign;
+      const origReplace = window.location.replace;
+      window.location.assign = function(url) {
+        isRedirecting = true;
+        origAssign.call(window.location, url);
+      };
+      window.location.replace = function(url) {
+        isRedirecting = true;
+        origReplace.call(window.location, url);
+      };
+
+      // For form submissions
+      document.addEventListener("submit", () => {
+        isRedirecting = true;
+      });
+    </script>
+  </body>
+</html>

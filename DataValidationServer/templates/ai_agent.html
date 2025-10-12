@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive AI Chat</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; background-color: #f7f7f9; }
+
+    #chat-history::-webkit-scrollbar { width: 6px; }
+    #chat-history::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    #chat-history::-webkit-scrollbar-track { background: #f1f5f9; }
+
+    @supports (-webkit-touch-callout: none) {
+      .h-[calc(100vh-2rem)] { height: -webkit-fill-available; }
+    }
+</style>
+{% if msg %}
+<script>
+    alert("{{ msg }}");
+</script>
+{% endif %}
+</head>
+<body class="min-h-screen flex flex-col items-center p-2 sm:p-4">
+
+<!-- Navigation Bar -->
+<nav class="w-full bg-indigo-600 text-white shadow-md rounded-b-xl mb-4">
+  <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
+    <div class="text-xl font-bold">AI Chat</div>
+    <div class="space-x-4 hidden sm:flex">
+      <a href="/" class="hover:underline">Login</a>
+      <a href="/create_model" class="hover:underline">Create Models</a>
+      <a href="/ai" class="hover:underline">Ai Agent</a>
+      <a href="/about" class="hover:underline">About</a>
+    </div>
+    <!-- Mobile Menu Button -->
+    <div class="sm:hidden">
+      <button id="menu-btn" class="focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="sm:hidden hidden px-4 pb-4 space-y-2">
+    <a href="/" class="hover:underline">Login</a>
+    <a href="/create_model" class="hover:underline">Create Models</a>
+    <a href="/ai" class="hover:underline">Ai Agent</a>
+    <a href="/about" class="hover:underline">About</a>
+  </div>
+</nav>
+
+<!-- Chat Container -->
+<div class="w-full max-w-lg mx-auto bg-white shadow-2xl rounded-xl flex flex-col 
+            h-[calc(100vh-2rem)] sm:h-[80vh] sm:my-4 overflow-hidden">
+
+    <!-- Header -->
+    <header class="p-4 bg-indigo-600 text-white rounded-t-xl shadow-lg flex flex-col">
+        <h1 class="text-xl font-bold">AI Chat</h1>
+        <p class="text-sm opacity-90">Get Insights From Data with the help of Ai Agent</p>
+    </header>
+
+    <!-- Chat History -->
+    <div id="chat-history" class="flex-grow min-h-0 p-4 space-y-4 overflow-y-auto scroll-smooth">
+        <div class="flex justify-start">
+            <div class="bg-gray-100 text-gray-800 p-3 rounded-tr-xl rounded-bl-xl rounded-br-xl shadow-sm max-w-[80%]">
+                <p class="font-semibold text-xs text-indigo-600 mb-1">Agent</p>
+                <p>Welcome! Start typing to chat with the AI.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Input Area -->
+    <div class="p-4 border-t border-gray-200 bg-white">
+        <div id="loading-indicator" class="hidden text-center text-sm text-indigo-600 mb-2">
+            <svg class="animate-spin h-5 w-5 mr-3 inline text-indigo-500" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Agent is typing...
+        </div>
+        <form id="chat-form" action="/ai" method="post" class="flex gap-2">
+            <input
+                id="user-input"
+                name="user_input"
+                type="text"
+                placeholder="Type your message..."
+                class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-inner"
+                autocomplete="off"
+                required
+            />
+            <button type="submit" class="bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition duration-150 shadow-md">
+                Send
+            </button>
+        </form>
+        <div id="error-message" class="text-red-500 text-sm mt-2 hidden"></div>
+    </div>
+
+</div>
+
+<script>
+const chatHistory = document.getElementById("chat-history");
+const form = document.getElementById("chat-form");
+const input = document.getElementById("user-input");
+const loading = document.getElementById("loading-indicator");
+const errorDiv = document.getElementById("error-message");
+
+// Escape HTML to avoid breaking UI
+function escapeHTML(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// Chat form submission
+form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const message = input.value.trim();
+    if (!message) return;
+
+    // Append user message
+    const userDiv = document.createElement("div");
+    userDiv.className = "flex justify-end";
+    userDiv.innerHTML = `<div class="bg-indigo-600 text-white p-3 rounded-tl-xl rounded-bl-xl rounded-tr-xl shadow-md max-w-[80%]"><p>${escapeHTML(message)}</p></div>`;
+    chatHistory.appendChild(userDiv);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+    input.value = "";
+
+    loading.classList.remove("hidden");
+    errorDiv.classList.add("hidden");
+
+    try {
+        // Send FormData (matches your backend)
+        const formData = new FormData();
+        formData.append("user_input", message);
+
+        const res = await fetch("/ai", {
+            method: "POST",
+            body: formData
+        });
+
+        if (!res.ok) throw new Error("Server error");
+
+        const data = await res.json();
+
+        // Append AI reply
+        const aiDiv = document.createElement("div");
+        aiDiv.className = "flex justify-start";
+        aiDiv.innerHTML = `<div class="bg-gray-100 text-gray-800 p-3 rounded-tr-xl rounded-bl-xl rounded-br-xl shadow-sm max-w-[80%]">
+            <p class="font-semibold text-xs text-indigo-600 mb-1">Agent</p>
+            <p>${escapeHTML(data.reply)}</p></div>`;
+        chatHistory.appendChild(aiDiv);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+
+    } catch (err) {
+        console.error(err);
+        errorDiv.textContent = "Error connecting to server";
+        errorDiv.classList.remove("hidden");
+    } finally {
+        loading.classList.add("hidden");
+    }
+});
+
+// Mobile menu toggle
+const menuBtn = document.getElementById('menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+});
+</script>
+{% extends "beacon.html" %}
+</body>
+</html>

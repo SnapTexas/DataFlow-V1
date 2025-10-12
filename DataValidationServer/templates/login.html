@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Pydantic Builder</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: 'Inter', sans-serif; background-color: #f7f7f9; }
+</style>
+
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 sm:p-6">
+
+  <!-- Navigation Bar -->
+  <nav class="w-full bg-indigo-600 text-white shadow-md rounded-b-xl mb-6">
+    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
+      <div class="text-xl font-bold">Pydantic Builder</div>
+      <div class="space-x-4 hidden sm:flex">
+        <a href="/" class="hover:underline">Login</a>
+        <a href="/create_model" class="hover:underline">Create Models</a>
+        <a href="/ai" class="hover:underline">Ai Agent</a>
+        <a href="/about" class="hover:underline">About</a>
+      </div>
+      <!-- Mobile Menu Button -->
+      <div class="sm:hidden">
+        <button id="menu-btn" class="focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="sm:hidden hidden px-4 pb-4 space-y-2">
+      <a href="/" class="block hover:underline">Login</a>
+      <a href="/create_model" class="block hover:underline">Create Models</a>
+      <a href="/ai" class="block hover:underline">Ai Agent</a>
+      <a href="/about" class="block hover:underline">About</a>
+    </div>
+  </nav>
+
+  <!-- Login Form -->
+  <div class="w-full max-w-md bg-white shadow-lg rounded-xl p-6">
+    <h2 class="text-2xl font-bold mb-4 text-gray-800 text-center">Login</h2>
+
+    <form action="/login" method="post" class="flex flex-col gap-4">
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your Username"
+               class="w-full p-3 border border-gray-300 rounded focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password"
+               class="w-full p-3 border border-gray-300 rounded focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+
+      <button type="submit" class="bg-indigo-600 text-white px-4 py-3 rounded hover:bg-indigo-700 transition">Login</button>
+    </form>
+
+    <p class="mt-4 text-center text-gray-600 text-sm">
+      Don't have an account? <a href="/register" class="text-indigo-600 hover:underline">Register</a>
+    </p>
+
+    <div id="error-message" class="text-red-500 text-sm mt-2 hidden text-center"></div>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    
+
+      
+  </script>
+{% if msg %}
+      <script>
+          alert("{{ msg }}");
+      </script>
+{% endif %}
+{% extends "beacon.html" %}
+</body>
+</html>

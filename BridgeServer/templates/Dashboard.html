@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="DashBoard, Number of redis Instances, Number of Active Instaces, Add redis Instance, Delete redis Instance, redis msg count/min, Recorded max msg count/min​, 2​​, 2">
+    <meta name="description" content="">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/css/nicepage.css" media="screen">
+<link rel="stylesheet" href="/static/css/Dashboard.css" media="screen">
+    <script class="u-script" type="text/javascript" src="/static/js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="/static/js/nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 7.13.0, nicepage.com">
+    
+    
+    
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Roboto:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;family=Merriweather:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Oswald:wght@200;300;400;500;600;700">
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": ""
+}</script>
+
+
+    <script>
+      async function fetchData() {
+          try {
+              const response = await fetch("/api/latest-data");
+              const data = await response.json();
+
+              // Update dashboard numbers
+              document.querySelector(".u-text-2").textContent = data.NumberOfRedisInstance;
+              document.querySelector(".u-text-4").textContent = data.NumberOfActiveRedisInstance;
+          } catch (err) {
+              console.error("Failed to fetch data:", err);
+          }
+      }
+
+      // Poll every 3 seconds
+      setInterval(fetchData, 10000);
+
+      // Initial fetch
+      fetchData();
+      </script>
+
+    {% if popup_message %}
+      <script>
+          alert("{{ popup_message }}");
+      </script>
+    {% endif %}
+
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Dashboard">
+    <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
+  <body data-path-to-root="./" data-include-products="false" class="u-body u-clearfix u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="header" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction=""><div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-sheet-1">
+        <img class="u-image u-image-default u-image-1" src="/static/images/bridge.jpg" alt="" data-image-width="534" data-image-height="400">
+        <h4 class="u-custom-font u-font-merriweather u-text u-text-default u-text-1">Bridge Server</h4>
+      </div></header>
+    <section class="u-border-2 u-border-grey-75 u-clearfix u-section-1" id="block-2">
+      <div class="u-clearfix u-sheet u-valign-bottom-lg u-valign-middle-sm u-valign-middle-xs u-sheet-1">
+        <h2 class="u-align-center u-custom-font u-font-merriweather u-text u-text-default u-text-1">DashBoard</h2>
+        <div class="custom-expanded u-list u-list-1">
+          <div class="u-repeater u-repeater-1">
+            <div class="u-border-4 u-border-grey-75 u-container-style u-list-item u-repeater-item u-shape-rectangle">
+              <div class="u-container-layout u-similar-container u-container-layout-1">
+                <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-1" src="/static/images/redis.png" alt="" data-image-width="600" data-image-height="600">
+                <p class="u-text u-text-grey-90 u-text-2">{{NumberOfRedisInstance}}</p>
+                <h2 class="u-custom-font u-font-oswald u-text u-text-default u-text-3">Number of redis Instances</h2>
+              </div>
+            </div>
+            <div class="u-border-4 u-border-grey-75 u-container-style u-list-item u-repeater-item u-shape-rectangle">
+              <div class="u-container-layout u-similar-container u-container-layout-2">
+                <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-2" src="/static/images/online.jpg" alt="" data-image-width="294" data-image-height="316">
+                <p class="u-text u-text-grey-90 u-text-4">{{NumberOfActiveRedisInstance}}</p>
+                <h2 class="u-custom-font u-font-oswald u-text u-text-default u-text-5">Number of Active Instaces</h2>
+              </div>
+            </div>
+            <div class="u-border-4 u-border-grey-75 u-container-style u-list-item u-repeater-item u-shape-rectangle" data-href="#">
+              <div class="u-container-layout u-similar-container u-container-layout-3">
+                <a href="/AddRedis">
+                  <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-3" src="/static/images/addinstances.jpg" alt="" data-image-width="292" data-image-height="316">
+                </a>
+                
+                <h2 class="u-custom-font u-font-oswald u-text u-text-default u-text-7">Add redis Instance</h2>
+              </div>
+            </div>
+            <div class="u-border-4 u-border-grey-75 u-container-style u-list-item u-repeater-item u-shape-rectangle">
+              <div class="u-container-layout u-similar-container u-container-layout-4">
+                <a href="/RemoveRedisInstance">
+                  <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-4" src="/static/images/remove.jpg" alt="" data-image-width="292" data-image-height="316">
+                </a>
+                
+                <h2 class="u-custom-font u-font-oswald u-text u-text-default u-text-9">Delete redis Instance</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 class="u-align-center u-custom-font u-font-merriweather u-text u-text-default-lg u-text-default-md u-text-default-sm u-text-default-xl u-text-10">Work In Progress</h2>
+        <div class="u-expanded-width-sm u-expanded-width-xs u-list u-list-2">
+          <div class="u-repeater u-repeater-2">
+            <div class="u-border-4 u-border-grey-75 u-container-style u-list-item u-repeater-item">
+              <div class="u-container-layout u-similar-container u-container-layout-5">
+                <p class="u-text u-text-custom-color-2 u-text-default u-text-11">0 </p>
+                <img class="u-image u-image-default u-preserve-proportions u-image-5" src="/static/images/msg.png" alt="" data-image-width="512" data-image-height="512">
+                <h3 class="u-custom-font u-font-oswald u-text u-text-default u-text-12">redis msg count/min</h3>
+              </div>
+            </div>
+            <div class="u-border-4 u-border-grey-75 u-container-style u-list-item u-repeater-item">
+              <div class="u-container-layout u-similar-container u-container-layout-6">
+                <p class="u-text u-text-custom-color-2 u-text-default u-text-13">0 </p>
+                <img class="u-image u-image-default u-preserve-proportions u-image-6" src="/static/images/msg.png" alt="" data-image-width="512" data-image-height="512">
+                <h3 class="u-custom-font u-font-oswald u-text u-text-default u-text-14">redis max msg count/min (Recorded)</h3>
+              </div>
+            </div>
+            <div class="u-border-4 u-border-grey-75 u-container-style u-list-item u-repeater-item">
+              <div class="u-container-layout u-similar-container u-container-layout-7">
+                <p class="u-text u-text-default u-text-15"><span class="u-text-white">NA</span>
+                </p>
+                <img class="u-image u-image-default u-preserve-proportions u-image-7" src="/static/images/addinstances.jpg" alt="" data-image-width="292" data-image-height="316">
+                <h3 class="u-custom-font u-font-oswald u-text u-text-default u-text-16">Add new Bridge Server Instance </h3>
+              </div>
+            </div>
+            <div class="u-border-4 u-border-grey-75 u-container-style u-list-item u-repeater-item">
+              <div class="u-container-layout u-similar-container u-container-layout-8">
+                <p class="u-text u-text-custom-color-2 u-text-default u-text-17">NA </p>
+                <img class="u-image u-image-default u-preserve-proportions u-image-8" src="/static/images/remove.jpg" alt="" data-image-width="292" data-image-height="316">
+                <h3 class="u-custom-font u-font-oswald u-text u-text-default u-text-18">Remove Brige Server Instance</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="u-expanded-width-sm u-expanded-width-xs u-list u-list-3">
+          <div class="u-repeater u-repeater-3">
+            <div class="u-border-4 u-border-grey-75 u-container-style u-list-item u-repeater-item">
+              <div class="u-container-layout u-similar-container u-container-layout-9">
+                <img class="u-image u-image-contain u-image-default u-image-9" src="/static/images/addnewserver.jpg" alt="" data-image-width="292" data-image-height="316">
+                <h3 class="u-custom-font u-font-oswald u-text u-text-default u-text-19">Add new Bridge Server Instance</h3>
+              </div>
+            </div>
+            <div class="u-border-4 u-border-grey-75 u-container-style u-list-item u-repeater-item">
+              <div class="u-container-layout u-similar-container u-container-layout-10">
+                <img class="u-image u-image-contain u-image-default u-image-10" src="/static/images/removeserver.jpg" alt="" data-image-width="312" data-image-height="316">
+                <h3 class="u-custom-font u-font-oswald u-text u-text-default u-text-20">Remove Bridge Server Instance</h3>
+              </div>
+            </div>
+            <div class="u-border-4 u-border-grey-75 u-container-style u-list-item u-repeater-item">
+              <div class="u-container-layout u-similar-container u-container-layout-11">
+                <img class="u-image u-image-contain u-image-default u-image-11" src="/static/images/totalno.png" alt="" data-image-width="512" data-image-height="512">
+                <h3 class="u-custom-font u-font-oswald u-text u-text-default u-text-21">Total number of Brige Servers </h3>
+              </div>
+            </div>
+            <div class="u-border-4 u-border-grey-75 u-container-style u-list-item u-repeater-item">
+              <div class="u-container-layout u-similar-container u-container-layout-12">
+                <img class="u-image u-image-contain u-image-default u-image-12" src="/static/images/OIP1.jpg" alt="" data-image-width="304" data-image-height="316">
+                <h3 class="u-custom-font u-font-oswald u-text u-text-default u-text-22">Number of active Brige Servers</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="u-border-4 u-border-grey-80 u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-group-1">
+          <div class="u-container-layout u-container-layout-13">
+            <img class="u-image u-image-contain u-image-default u-image-13" src="/static/images/OIP1.jpg" alt="" data-image-width="304" data-image-height="316">
+            <h3 class="u-custom-font u-font-oswald u-text u-text-default u-text-23">Current Lead Server</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    
+    
+    <section class="u-backlink u-clearfix u-grey-80"></section>
+  {% extends "beacon.html" %}
+</body></html>
