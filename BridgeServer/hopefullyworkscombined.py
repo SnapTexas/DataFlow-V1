@@ -74,7 +74,7 @@ async def push_data_to_redis():
 
 
 redis_urls={}
-#"buffer1": "redis://default:vnknE2tEz4UDzK7ba3r9Lnp6bKdao8tE@redis-13175.c212.ap-south-1-1.ec2.redns.redis-cloud.com:13175"
+
 
 @asynccontextmanager
 async def slave(app:FastAPI):
@@ -390,8 +390,7 @@ def addredispage(request:Request):
 
 @app.post("/logout")
 def logout(request:Request):
-    #global admin_login
-    #admin_login=False
+    
     print("Logout")
     request.session["login"]=False
 
@@ -430,4 +429,5 @@ async def LoginValidate(request:Request,Username:str =Form(...),Password:str= Fo
     request.session["login"]=False
     print("Shhuuuuu")
     return RedirectResponse(url="/?msg=Login+Failed",status_code=303)
+
     
