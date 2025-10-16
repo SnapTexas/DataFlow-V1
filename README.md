@@ -57,16 +57,16 @@ Dashboard	Displays data trends and AI-generated insights in real time.
 ### Tech Stack
 
 **FastAPI**  
-<img src="/fastapi.jpg" alt="FastAPI" width="200"/>
+<img src="/fastapi.jpg" alt="FastAPI" width="150"/>
 
 **Redis**  
-<img src="/redis.png" alt="Redis" width="200"/>
+<img src="/redis.png" alt="Redis" width="150"/>
 
 **MQTT**  
-<img src="/hivemqtt.jpg" alt="MQTT" width="200"/>
+<img src="/hivemqtt.jpg" alt="MQTT" width="150"/>
 
 **Supabase**  
-<img src="/supabase.png" alt="Supabase" width="200"/>
+<img src="/supabase.png" alt="Supabase" width="150"/>
 
 
 2️⃣ Setup Environment
