@@ -37,7 +37,7 @@ Dashboard	Displays data trends and AI-generated insights in real time.
 
 🏗️ System Architecture Diagram
 
-(If you have a data flow diagram image, include it here)
+
 Example:
 
 [IoT Sensor] → [MQTT Broker] → [BridgeServer] → [Redis Buffer] → [Validation Server] → [SQL Database] → [AI Agent] → [Dashboard]
