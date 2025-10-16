@@ -50,19 +50,6 @@ Tech Stack Used
   - Gemini
   - SupaBase
 
-🧰 Technologies Used
-Component	Technology
-IoT Communication	MQTT
-API & Backend	FastAPI
-Data Buffer	Redis
-Database	MySQL / Supabase
-Frontend / Dashboard	HTML, JS, Chart.js
-AI & Analysis	Python (NumPy / Pandas / Custom AI Logic)
-Authentication	JWT / Encrypted Admin Passwords
-🚀 Installation & Setup
-1️⃣ Clone Repository
-git clone https://github.com/yourusername/data-pipeline.git
-cd data-pipeline
 
 2️⃣ Setup Environment
 
