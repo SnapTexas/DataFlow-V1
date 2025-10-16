@@ -46,7 +46,19 @@ Data Flow Diagram
 Tech Stack Used
 
 MQTT
-![Project Diagram](/data_flow_diagram.png)
+![Project Diagram](/hivemqt.png)
+
+Redis
+![Project Diagram](/redis.png)
+
+FastAPI
+![Project Diagram](/fastapi.png)
+
+Ai Agent
+![Project Diagram](/gemini.png)
+
+SupaBase
+![Project Diagram](/supabase.png)
 
 🧰 Technologies Used
 Component	Technology
