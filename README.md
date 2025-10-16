@@ -35,15 +35,15 @@ Dashboard	Displays data trends and AI-generated insights in real time.
 
 📊 Web Dashboard — Displays sensor history, live updates, and summarized insights.
 
-🏗️ System Architecture Diagram
+# System Architecture Diagram
 
 ![Project Diagram](/high_level_system_architechture.png)
 
-Data Flow Diagram
+# Data Flow Diagram
 
 ![Project Diagram](/data_flow_diagram.png)
 
-Tech Stack Used
+# Tech Stack Used
   - MQTT
   - Redis
   - FastAPI
