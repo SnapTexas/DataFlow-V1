@@ -186,6 +186,5 @@ While the current implementation of the IoT data pipeline (v1) demonstrates a fu
 👨‍💻 Author
 
 Snap
-B.Tech Computer Science | IoT & AI Enthusiast
-📧 Email: [your email here]
-🔗 GitHub: [your GitHub link here]
+BSC Computer Science | IoT | AI | WEB | BACKEND Enthusiast
+📧 Email: mshahid00989800@gmail.com
