@@ -56,13 +56,13 @@ Dashboard	Displays data trends and AI-generated insights in real time.
 **Primary language:** Python  
 **Tech Stack:** 
 FastAPI 
-![Project Diagram](/fastapi.jpg)
+<img src="/fastapi.jpg" alt="Tech Stack" width="400" height="400"/>
 
 Redis
 ![Project Diagram](/redis.png)
 
 MQTT
-![Project Diagram](/hivemqtt.png)
+![Project Diagram](/hivemqtt.jpg)
 
 Supabase
 ![Project Diagram](/supabase.png)
