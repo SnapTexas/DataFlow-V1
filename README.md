@@ -43,6 +43,11 @@ Data Flow Diagram
 
 ![Project Diagram](/data_flow_diagram.png)
 
+Tech Stack Used
+
+MQTT
+![Project Diagram](/data_flow_diagram.png)
+
 🧰 Technologies Used
 Component	Technology
 IoT Communication	MQTT
