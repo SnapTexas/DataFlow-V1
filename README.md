@@ -37,6 +37,7 @@ Dashboard	Displays data trends and AI-generated insights in real time.
 
 🏗️ System Architecture Diagram
 
+![Project Diagram](images/diagram.png)
 
 Example:
 
