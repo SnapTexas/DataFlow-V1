@@ -121,31 +121,31 @@ Limitations
 Despite successfully implementing a functional real-time IoT data pipeline, the 
 current system has several limitations: 
 1. Single Instance Architecture 
-o Both the Bridge Server and Data Validation Server currently run as single 
-instances. 
-o This creates potential bottlenecks and a single point of failure. 
+  o Both the Bridge Server and Data Validation Server currently run as single 
+  instances. 
+  o This creates potential bottlenecks and a single point of failure. 
 2. Limited Fault Tolerance 
-o Redis buffering ensures some smoothing, but if a Redis instance goes down, 
-recovery and failover are limited. 
+  o Redis buffering ensures some smoothing, but if a Redis instance goes down, 
+  recovery and failover are limited. 
 3. Scope of Data Sources 
-o Currently, the pipeline only processes IoT sensor data. 
-o Integration of other types of structured or unstructured data is not supported 
-yet. 
+  o Currently, the pipeline only processes IoT sensor data. 
+  o Integration of other types of structured or unstructured data is not supported 
+  yet. 
 
 4. AI Agent Capabilities 
-o The AI agent only provides insights and answers based on stored data. 
-o It does not autonomously act on data or trigger tasks in the system. 
+  oThe AI agent only provides insights and answers based on stored data. 
+  o It does not autonomously act on data or trigger tasks in the system. 
 5. Security Constraints 
-o Data transmission between IoT devices, MQTT broker, and servers lacks end
-to-end encryption. 
-o Authentication and authorization mechanisms are limited to admin login for 
-dashboards. 
+  o Data transmission between IoT devices, MQTT broker, and servers lacks end
+  to-end encryption. 
+  o Authentication and authorization mechanisms are limited to admin login for 
+  dashboards. 
 6. Dynamic Scaling 
-o While Redis instances can be added or removed dynamically, the servers 
-themselves cannot scale horizontally. 
+  o While Redis instances can be added or removed dynamically, the servers 
+  themselves cannot scale horizontally. 
 7. Real-Time Metrics & Monitoring 
-o The system does not provide advanced metrics or monitoring dashboards for 
-performance, latency, or data health. 
+  o The system does not provide advanced metrics or monitoring dashboards for 
+  performance, latency, or data health. 
 
 📊 Future Enhancements
 
