@@ -44,16 +44,11 @@ Data Flow Diagram
 ![Project Diagram](/data_flow_diagram.png)
 
 Tech Stack Used
-
-MQTT
-
-Redis
-
-FastAPI
-
-Ai Agent
-
-SupaBase
+  - MQTT
+  - Redis
+  - FastAPI
+  - Ai Agent
+  - SupaBase
 
 🧰 Technologies Used
 Component	Technology
