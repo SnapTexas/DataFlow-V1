@@ -1,11 +1,6 @@
-# Force language detection
-*.py linguist-language=Python
-*.html linguist-language=HTML
-*.css linguist-language=CSS
-*.js linguist-language=JavaScript
-
-# Optional: ignore large or generated files from language stats
-*.min.js linguist-vendored
+# Ignore static files in language stats
+static/** linguist-vendored
+templates/** linguist-vendored
 *.min.css linguist-vendored
-node_modules/** linguist-vendored
-dist/** linguist-vendored
+*.min.js linguist-vendored
+
