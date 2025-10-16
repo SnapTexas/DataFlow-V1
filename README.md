@@ -39,9 +39,9 @@ Dashboard	Displays data trends and AI-generated insights in real time.
 
 ![Project Diagram](/high_level_system_architechture.png)
 
-Example:
+Data Flow Diagram
 
-[IoT Sensor] → [MQTT Broker] → [BridgeServer] → [Redis Buffer] → [Validation Server] → [SQL Database] → [AI Agent] → [Dashboard]
+![Project Diagram](/data_flow_diagram.png)
 
 🧰 Technologies Used
 Component	Technology
