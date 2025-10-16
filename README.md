@@ -47,7 +47,7 @@ Tech Stack Used
   - MQTT
   - Redis
   - FastAPI
-  - Ai Agent
+  - Gemini
   - SupaBase
 
 🧰 Technologies Used
