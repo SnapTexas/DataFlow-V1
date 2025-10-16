@@ -54,8 +54,18 @@ Dashboard	Displays data trends and AI-generated insights in real time.
 [![Python](https://img.shields.io/badge/Language-Python-blue)](https://www.python.org/)
 
 **Primary language:** Python  
-**Tech Stack:** FastAPI, Redis, MQTT, Supabase
+**Tech Stack:** 
+FastAPI 
+![Project Diagram](/fastapi.jpg)
 
+Redis
+![Project Diagram](/redis.png)
+
+MQTT
+![Project Diagram](/hivemqtt.png)
+
+Supabase
+![Project Diagram](/supabase.png)
 
 
 2️⃣ Setup Environment
