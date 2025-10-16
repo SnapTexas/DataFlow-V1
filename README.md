@@ -49,6 +49,13 @@ Tech Stack Used
   - FastAPI
   - Gemini
   - SupaBase
+ # IoT Data Pipeline
+
+[![Python](https://img.shields.io/badge/Language-Python-blue)](https://www.python.org/)
+
+**Primary language:** Python  
+**Tech Stack:** FastAPI, Redis, MQTT, Supabase
+
 
 
 2️⃣ Setup Environment
