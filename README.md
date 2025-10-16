@@ -37,7 +37,7 @@ Dashboard	Displays data trends and AI-generated insights in real time.
 
 🏗️ System Architecture Diagram
 
-![Project Diagram](images/diagram.png)
+![Project Diagram](/SnapTexas/DataFlow-V1/blob/main/high_level_system_architechture.png)
 
 Example:
 
